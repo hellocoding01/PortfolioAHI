@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>자산건전성 분류 자동화 PM </title>
+<title>자산건전성 분류 자동화</title>
 
 <style>
 body {
@@ -78,7 +78,7 @@ p {
 <body>
 <h1>  자산건전성 분류 자동화 PM </h1>
 
- <img src="assets/img/Project/asset.PNG" alt="" width="500" class ="portfolio__img" />
+ <img src="assets/img/Project/asset.png" alt="" width="500" class ="portfolio__img" />
 
 <section>
     <h2>프로젝트 개요</h2>
@@ -95,7 +95,8 @@ p {
 <section>
     <h2>담당 역할</h2>
     <ul>
-        <li>요구사항 분석 → 업무 협의 → DB 설계 → 개발 → 테스트 → 운영</li>
+        <li>업무 전과정 수행</li>
+        <P>*요구사항 분석 → 업무 협의 → DB 설계 → 개발 → 테스트 → 운영</p>
     </ul>
 </section>
 
@@ -112,7 +113,7 @@ p {
 
 <section>
     <h2>시스템 구조</h2>
-    <p>시스템 구조도 이미지 넣기</p>
+    <p>사용자 → UI서버(WebSquare) → APP서버(Service) → 배치서버(TeraStream) → 결과 파일 출력</p>
 </section>
 <section>
     <h2>주요 기능</h2>
@@ -127,7 +128,7 @@ p {
 <section>
     <h2>주요 화면</h2>
     <h3>업로드 화면</h3>
-     <img src="assets/img/Project/asset2.PNG" alt="" width="500" class ="portfolio__img_detail" />
+     <img src="assets/img/Project/asset2.png" alt="" width="500" class ="portfolio__img_detail" />
      <p>기초데이터 업로드 및 상태 조회 기능 제공</p>
     <h3>분류 화면</h3>
     <h3>수정 화면</h3>
@@ -136,25 +137,57 @@ p {
 <section>
     <h2>기술적 이슈 및 해결</h2>
     <h3>문제1</h3>
-    <p>상황: 대량데이터 조회 시 속도 저하 발생</p>
-    <p>원인: 인덱스 미적용</p>
-    <p>해결: 인덱스 추가 및 SQL 튜닝</p>
-    <p>결과: 조회시간 5초 → 0.5초</p>
+    <ul>
+    <li><strong>상황</strong></li>
+    <p>업로드 건수가 6만건 이상이 되면서 10분 내외 배치 속도 발생</p>
+    <li><strong>원인</strong></li>
+    <p>건별 insert</p>
+    <li><strong>해결</strong></li>
+    <p>- 건별 insert에서 bulk insert로 변경</p>
+    <p>- commit interval 값 최적화</p>
+    <li><strong>결과</strong></li>
+    <p>배치수행 속도 개선(3분24초 → 1분34초)</p>
+    </ul>
+    <br>
+    <h3>문제2</h3>
+    <ul>
+    <li><strong>상황</strong></li>
+    <p>업로드 파일이 파일최대 사이즈인 50MB 초과하여 업로드 불가</p>
+    <li><strong>원인</strong></li>
+    <p>파일 최대 사이즈</p>
+    <li><strong>해결</strong></li>
+    <p>- http.m Limit RequestBody 값 수정(50MB → 100MB)</p>
+    <p>- WebToB서버 설정파일 변경 후 재기동 수행</p>
+    <li><strong>결과</strong></li>
+    <p>업로드 오류 개선</p>
+    </ul>
 </section>
 
 <section>
     <h2>성과</h2>
-    <p>자산건전성 데이터의 체계적 저장 및 관리 구현</p>
-    <p>현업의 수작업 처리시간 단축(3영업일 → 1분)</p>
-    <p>휴먼 오류 감소</p>
+    <ul>
+    <li>자산건전성 데이터의 체계적 저장 및 관리 구현</li>
+    <li>현업의 수작업 처리시간 단축(3영업일 → 1분)</li>
+    <li>휴먼 오류 감소</li>
+    </ul>
 </section>
 
 <section>
     <h2>회고</h2>
     <h3>배운점</h3>
-    <p>Spring 트랜잭션 처리 이해</p>
+    <ul>
+    <li>Oracle PL/SQL을 통한 데이터 처리 경험</li>
+    <li>TeraStream을 활용한 ETL변환 경험</li>
+    <li>Spring 기반 SC Service 구조에서의 요청/응답 처리 이해</li>
+    <li>WebSquare UI와 APP서버 간 연계 구조 이해</li>
+    <li>복잡한 결과에 있어 분류 원인의 추적 관리가 중요성을 이해</li>
+    </ul>
     <h3>아쉬운점</h3>
-    <p>테스트 코드 부족</p>
+    <ul>
+    <li>단위테스트 부족으로 인한 운영 에러 발생</li>
+    <li>에러 확인 서비스 로직 추가 필요</li>
+    <li>현업과 요건 간 우선순위 적용 방식에 대한 기준을 사전에 충분히 정리하지 않아 개발단계에서 추가 협의 발생</li>
+    </ul>
 </section>
 
 
