@@ -1,10 +1,199 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>JT저축은행 신규 UI 전환 프로젝트</title>
+
+<style>
+body {
+    margin: 30px; /* 바깥 여백 */
+}
+</style>
+
+<style>
+body {
+    margin: 40px auto;
+    max-width: 1000px;
+    padding: 20px;
+    font-family: "맑은 고딕", sans-serif;
+    background-color: #f5f7fa;
+    line-height: 1.8;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #2c3e50;
+}
+
+h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #4a90e2;
+    color: #2c3e50;
+}
+
+h3 {
+    margin-top: 20px;
+    color: #34495e;
+}
+
+section {
+    background: white;
+    padding: 25px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.portfolio__img {
+    width: 100%;
+    max-width: 700px;
+    display: block;
+    margin: 0 auto 40px auto;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.15);
+}
+
+.portfolio__img_detail {
+    width: 100%;
+    max-width: 600px;
+    display: block;
+    margin: 10px 0 0 0;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.15);
+}
+
+ul {
+    padding-left: 20px;
+}
+
+p {
+    margin: 8px 0;
+}
+</style>
+
 </head>
 <body>
-UI
+<h1>HTML5 기반 UI 전환 프로젝트 內 EDMS 파트 PL</h1>
+
+<!--  <img src="assets/img/Project/asset.png" alt="" width="500" class ="portfolio__img" /> -->
+
+<section>
+    <h2>프로젝트 개요</h2>
+    <ul>
+    	<li>기존 외부 ActiveX 기반으로 제공되던 EDMS 문서관리 기능을 내부 시스템에 내재화하여 유지보수성 및 확장성 개선 프로젝트</li>
+    </ul>
+ </section>
+
+<section>
+    <h2>기간</h2>
+    <ul>
+    <li>UI 프로젝트 총 기간</li>
+    <p>2025.01 ~ 2025.12</p>
+    <li>EDMS 기간</li>
+    <p>2025.12 ~ 2026.03</p>
+    </ul>
+</section>
+
+<section>
+    <h2>담당 역할</h2>
+    <ul>
+        <li>프로젝트 일정 및 개발 진척도 관리</li>
+        <li>외주 개발자와의 커뮤니케이션 및 산출물 검토</li>
+        <li>개발 이슈 및 리스크 관리</li>
+        <li>운영 안정화 및 장애 대응 총괄</li>
+    </ul>
+</section>
+
+<section>
+<h2>기술 및 개발 환경</h2>
+<ul>
+    <li><strong>Language</strong> : Java, SQL</li>
+    <li><strong>Framework</strong> : Spring</li>
+    <li><strong>Database</strong> : Oracle</li>
+    <li><strong>Middleware</strong> : JEUS</li>
+    <li><strong>Solution</strong> : BXM, Frism, WebSquare, ImageViewer</li>
+</ul>
+</section>
+
+<section>
+    <h2>시스템 구조</h2>
+    <ul>
+    <li><strong>저장</strong></li>
+    <p>사용자 → UI서버(WebSquare) → APP서버(Service) → Xvarm서버(Save) → DB insert</p>
+    <li><strong>조회</strong></li>
+    <p>사용자 → UI서버(WebSquare) → APP서버(Service) → Xvarm서버(Down) → 배치서버(Save) → OCR서버(Viewer) </p>
+    <li><strong>수정</strong></li>
+    <p>사용자 → UI서버(WebSquare) → APP서버(Service) → Xvarm서버(Update/Delete) </p>
+    </ul>
+</section>
+<section>
+    <h2>주요 기능</h2>
+    <ul>
+        <li>EDMS문서 조회/저장/수정/삭제</li>
+        <li>권한별 기능 조작</li>
+    </ul>
+</section>
+<section>
+    <h2>주요 화면</h2>
+    <h3>ImageViewer 화면</h3>
+     <img src="assets/img/Project/asset2.png" alt="" width="500" class ="portfolio__img_detail" />
+     <p>사용자가 문서를 조회/저장/수정/삭제가 가능한 화면</p>
+</section>
+
+<section>
+    <h2>기술적 이슈 및 해결</h2>
+    <h3>문제1</h3>
+    <ul>
+    <li><strong>상황</strong></li>
+    <p>Batch reader에서 평일이면서 영업일이 아닌 경우 배치 실패</p>
+    <li><strong>원인</strong></li>
+    <p>비영업일이면 retrun값 없이 reader 종료</p>
+    <li><strong>해결</strong></li>
+    <p>- 평일이면서 영업일이 아닌 경우 배치 실패 처리되지 않도록 return값을 null로 추가하여 reader stepd을 Complite시킴</p>
+    <li><strong>결과</strong></li>
+    <p>retrun null로 인해 후속 procession 수행되지 않고 정상 종료 처리</p>
+    </ul>
+    <br>
+    <h3>문제2</h3>
+    <ul>
+    <li><strong>상황</strong></li>
+    <p>실시간 중앙회 전문통신 시 여신 원장 업데이트 항목에 차기원금납입일이 누락되어 연체시작일이 오조회 됨</p>
+    <li><strong>원인</strong></li>
+    <p>환원데이터와 실시간데이터의 D-1 간극</p>
+    <li><strong>해결</strong></li>
+    <p>- 전문송신 받은 차기원금납입일 항목을 원장에 업데이트하여 납입예정일을 정상 산출함</p>
+    <p>- WebToB서버 설정파일 변경 후 재기동 수행</p>
+    <li><strong>결과</strong></li>
+    <p>연체시작일 정상 조회</p>
+    </ul>
+</section>
+
+<section>
+    <h2>성과</h2>
+    <ul>
+    <li>ActiveX 기반 프로그램을 내부 소스코드로 수정하여 유지보수 용이(코드 수정 기간 7영업일 → 1영업일)</li>
+    <li>기능별 권한 확인 부분을 추가하여 고객 정보 관리 보안 강화</li>
+    </ul>
+</section>
+
+<section>
+    <h2>회고</h2>
+    <h3>배운점</h3>
+    <ul>
+    <li>서버 간 API 통신 개발 경험을 통해 데이터를 주고받는 구조와 연결 방식을 이해</li>
+    <li>솔루션 엔진을 리눅스 서버에 설치하고 로그 확인, 프로세스 점검, 설정 파일 관리 등을 수행하며 서버 기반 문제 분석 및 운영 역량 향상</li>
+    </ul>
+    <h3>아쉬운점</h3>
+    <ul>
+    <li>기존 소스코드가 존재하지 않아 화면 및 기능 요건을 분석하는 데 프로젝트 초기에 많은 시간 소요</li>
+    <li>향후에는 소스코드가 존재하지 않는 프로그램은 기존 시스템의 기능 명세서나 화면 정의서를 사전 정리하여 현업과 요구사항을 체계적으로 정리하는 과정을 먼저 진행하면 시간 단축 가능</li>
+
+    </ul>
+</section>
+
+
 </body>
 </html>
