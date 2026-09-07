@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>자산건전성 분류 자동화</title>
+
+<style>
+body {
+    margin: 30px; /* 바깥 여백 */
+}
+</style>
+
+<style>
+body {
+    margin: 40px auto;
+    max-width: 1000px;
+    padding: 20px;
+    font-family: "맑은 고딕", sans-serif;
+    background-color: #f5f7fa;
+    line-height: 1.8;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #2c3e50;
+}
+
+h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #4a90e2;
+    color: #2c3e50;
+}
+
+h3 {
+    margin-top: 20px;
+    color: #34495e;
+}
+
+section {
+    background: white;
+    padding: 25px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.portfolio__img {
+    width: 100%;
+    max-width: 700px;
+    display: block;
+    margin: 0 auto 40px auto;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.15);
+}
+
+.portfolio__img_detail {
+    width: 100%;
+    max-width: 600px;
+    display: block;
+    margin: 10px 0 0 0;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.15);
+}
+
+ul {
+    padding-left: 20px;
+}
+
+p {
+    margin: 8px 0;
+}
+</style>
+
+</head>
+<body>
+<h1>  자산건전성 분류 자동화 PM </h1>
+
+ <!-- <img src="assets/img/Project/asset.png" alt="" width="500" class ="portfolio__img" /> -->
+
+<section>
+    <h2>프로젝트 개요</h2>
+    <ul>
+    	<li>자산건전성 분류 업무를 자동화하여 수작업 의존도를 줄이고 분류 정확성과 처리 효율성을 향상시키기 위한 프로젝트</li>
+    </ul>
+ </section>
+
+<section>
+    <h2>기간</h2>
+    <p>2024.07~2025.02</p>
+</section>
+
+<section>
+    <h2>담당 역할</h2>
+    <ul>
+        <li>업무 전과정 수행</li>
+        <P>*요구사항 분석 → 업무 협의 → DB 설계 → 개발 → 테스트 → 운영</p>
+    </ul>
+</section>
+
+<section>
+<h2>기술 및 개발 환경</h2>
+<ul>
+    <li><strong>Language</strong> : Java, PL/SQL</li>
+    <li><strong>Framework</strong> : Spring</li>
+    <li><strong>Database</strong> : Oracle</li>
+    <li><strong>Middleware</strong> : JEUS, TeraStream</li>
+    <li><strong>Solution</strong> : BXM, Frism, WebSquare, G-Form</li>
+</ul>
+</section>
+
+<section>
+    <h2>시스템 구조</h2>
+    <p>사용자 → UI서버(WebSquare) → APP서버(Service) → 배치서버(TeraStream) → 결과 파일 출력</p>
+</section>
+<section>
+    <h2>주요 기능</h2>
+    <ul>
+        <li>환원데이터 배치 적재</li>
+        <li>기초데이터 업로드</li>
+        <li>자산건전성 자동분류</li>
+        <li>기초데이터 업로드 상태 조회</li>
+        <li>자산건전성 분류 결과 수정</li>
+    </ul>
+</section>
+<section>
+    <h2>주요 화면</h2>
+    <h3>업로드 화면</h3>
+     <img src="assets/img/portfolio/asset.jpg" alt="" width="500" class ="portfolio__img_detail" />
+     <p>기초데이터 업로드 및 조회 기능 제공</p>
+     <h3>분류 화면</h3>
+      <img src="assets/img/portfolio/asset.jpg" alt="" width="500" class ="portfolio__img_detail" />
+     <p>기초데이터 자산건전성 분류 및 업로드 상태 조회 기능 제공</p>
+</section>
+
+<section>
+    <h2>기술적 이슈 및 해결</h2>
+    <h3>문제1</h3>
+    <ul>
+    <li><strong>상황</strong></li>
+    <p>업로드 건수가 6만건 이상이 되면서 10분 내외 배치 속도 발생</p>
+    <li><strong>원인</strong></li>
+    <p>건별 insert</p>
+    <li><strong>해결</strong></li>
+    <p>- 건별 insert에서 bulk insert로 변경</p>
+    <p>- commit interval 값 최적화</p>
+    <li><strong>결과</strong></li>
+    <p>배치수행 속도 개선(3분24초 → 1분34초)</p>
+    </ul>
+    <br>
+    <h3>문제2</h3>
+    <ul>
+    <li><strong>상황</strong></li>
+    <p>업로드 파일이 파일최대 사이즈인 50MB 초과하여 업로드 불가</p>
+    <li><strong>원인</strong></li>
+    <p>파일 최대 사이즈</p>
+    <li><strong>해결</strong></li>
+    <p>- http.m Limit RequestBody 값 수정(50MB → 100MB)</p>
+    <p>- WebToB서버 설정파일 변경 후 재기동 수행</p>
+    <li><strong>결과</strong></li>
+    <p>업로드 오류 개선</p>
+    </ul>
+</section>
+
+<section>
+    <h2>성과</h2>
+    <ul>
+    <li>자산건전성 데이터의 체계적 저장 및 관리 구현</li>
+    <li>현업의 수작업 처리시간 단축(3영업일 → 1분)</li>
+    <li>휴먼 오류 감소</li>
+    </ul>
+</section>
+
+<section>
+    <h2>회고</h2>
+    <h3>배운점</h3>
+    <ul>
+    <li>Oracle PL/SQL을 통한 데이터 처리 경험</li>
+    <li>TeraStream을 활용한 ETL변환 경험</li>
+    <li>Spring 기반 SC Service 구조에서의 요청/응답 처리 이해</li>
+    <li>WebSquare UI와 APP서버 간 연계 구조 이해</li>
+    <li>복잡한 결과에 있어 분류 원인의 추적 관리가 중요성을 이해</li>
+    </ul>
+    <h3>아쉬운점</h3>
+    <ul>
+    <li>단위테스트 부족으로 인한 운영 에러 발생</li>
+    <li>에러 확인 서비스 로직 추가 필요</li>
+    <li>현업과 요건 간 우선순위 적용 방식에 대한 기준을 사전에 충분히 정리하지 않아 개발단계에서 추가 협의 발생</li>
+    </ul>
+</section>
+
+
+</body>
+</html>
