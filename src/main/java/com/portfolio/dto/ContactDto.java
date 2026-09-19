@@ -2,12 +2,12 @@ package com.portfolio.dto;
 
 public class ContactDto {
     String name;
-    String email; 
+    String email;
     String company;
-    String subject; 
+    String subject;
     String message;
-    
-    
+
+
 	public String getName() {
 		return name;
 	}
@@ -37,5 +37,5 @@ public class ContactDto {
 	}
 	public void setMessage(String message) {
 		this.message = message;
-	} 
+	}
 }

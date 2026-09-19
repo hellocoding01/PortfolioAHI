@@ -150,7 +150,7 @@ body{
 <!-- <form class="contact-form" id = "contactForm" action = "contact" method = "post"  > -->
 <form class="contact-form"
       id="contactForm"
-      action="${pageContext.request.contextPath}/contact"
+      action="/contact"
       method="post">
 
 <input type="text" id = "name" name = "name" placeholder="👤 닉네임">
