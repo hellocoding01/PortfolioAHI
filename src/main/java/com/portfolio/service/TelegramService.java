@@ -1,12 +1,11 @@
 package com.portfolio.service;
 
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
-
 import com.portfolio.dto.ContactDto;
 
 public class TelegramService {
@@ -45,26 +44,37 @@ public class TelegramService {
 				+ "제목 : " + dto.getSubject() + "\n"
 				+ "내용 : " + dto.getMessage();
 
-		String encodeMessage =
-				URLEncoder.encode(message, StandardCharsets.UTF_8);
-
 		String apiUrl =
 				"https://api.telegram.org/bot"
 				+BOT_TOKEN
-				+"/sendMessage?chat_id="
-				+CHAT_ID
-				+"&text="
-				+encodeMessage;
+				+"/sendMessage";
 
 		URL url = new URL(apiUrl);
 
 		HttpURLConnection con =
 				(HttpURLConnection) url.openConnection();
 
-		con.setRequestMethod("GET");
+		con.setRequestMethod("POST");
+		con.setDoOutput(true);
+		
+		con.setRequestProperty(
+		        "Content-Type",
+		        "application/json; charset=UTF-8"
+		);
+		
+		String json =
+		        "{"
+		        + "\"chat_id\":\"" + CHAT_ID + "\","
+		        + "\"text\":\"" + escapeJson(message) + "\""
+		        + "}";
+		
+		try (OutputStream os = con.getOutputStream()) {
+		    os.write(json.getBytes(StandardCharsets.UTF_8));
+		}
 
 		int responseCode = con.getResponseCode();
-
+		
+		System.out.println("Request Method : " + con.getRequestMethod());
 		System.out.println("responseCode : " + responseCode);
 
 		con.disconnect();
@@ -73,5 +83,13 @@ public class TelegramService {
 	}
 
 	}
+    // JSON 문자열 처리
+    private String escapeJson(String value) {
+        return value
+                .replace("\\", "\\\\")
+                .replace("\"", "\\\"")
+                .replace("\n", "\\n")
+                .replace("\r", "\\r");
+    }
 
 }
